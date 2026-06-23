@@ -18,21 +18,54 @@
 </head>
 <body class="light-iridescent min-h-screen flex flex-col relative antialiased selection:bg-[#7C38A8] selection:text-white">
 
-    <!-- Curseur Boule Disco Vectoriel (Masqué sur mobile/tablette) -->
+    <!-- Curseur Boule Disco Vectoriel Haute Définitio) -->
     <div id="custom-disco-cursor" class="hidden lg:flex">
-        <svg class="spin-disco-ball" viewBox="0 0 24 24" width="36" height="36" fill="none" xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)">
+        <svg class="spin-disco-ball" viewBox="0 0 36 36" width="38" height="38" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
-                <radialGradient id="discoGrad" cx="50%" cy="50%" r="50%" fx="30%" fy="30%">
+                <radialGradient id="discoGrad" cx="35%" cy="30%" r="65%">
                     <stop offset="0%" stop-color="#FFFFFF" />
-                    <stop offset="35%" stop-color="#FFD700" />
-                    <stop offset="70%" stop-color="#BA91D6" />
-                    <stop offset="100%" stop-color="#7C38A8" />
+                    <stop offset="25%" stop-color="#FFF4B8" /> <!-- Eclat jaune d'or chaleureux de la planche -->
+                    <stop offset="55%" stop-color="#C29FE3" /> <!-- Lavande -->
+                    <stop offset="85%" stop-color="#7C38A8" /> <!-- Violet principal -->
+                    <stop offset="100%" stop-color="#1D0E26" /> <!-- Ombre de volume -->
                 </radialGradient>
             </defs>
-            <circle cx="12" cy="12" r="9" fill="url(#discoGrad)" stroke="#FFFFFF" stroke-width="0.75" />
-            <path d="M12 3v18M3 12h18M5.5 5.5l13 13M5.5 18.5l13-13" stroke="rgba(255,255,255,0.65)" stroke-width="0.35" />
-            <path d="M12 3a9 9 0 0 1 0 18M12 3a9 9 0 0 0 0 18" stroke="rgba(255,255,255,0.45)" stroke-width="0.35" />
-            <path d="M3 12a9 9 0 0 1 18 0M3 12a9 9 0 0 0 18 0" stroke="rgba(255,255,255,0.45)" stroke-width="0.35" />
+            
+            <!-- Petite attache de suspension métallique en haut -->
+            <path d="M18 1.5 a2.5 2.5 0 1 0 0.001 0" stroke="#FFFFFF" stroke-width="1.2" fill="none" />
+            <rect x="16.2" y="3.5" width="3.6" height="1.8" rx="0.5" fill="#E2E8F0" stroke="#FFFFFF" stroke-width="0.5" />
+            
+            <!-- Sphère Principale -->
+            <circle cx="18" cy="17" r="12" fill="url(#discoGrad)" stroke="#FFFFFF" stroke-width="0.8" />
+            
+            <!-- Mosaïque de Facettes Miroirs 3D Courbées -->
+            <g stroke="rgba(255, 255, 255, 0.55)" stroke-width="0.45">
+                <!-- Lignes de latitude (courbes horizontales) -->
+                <path d="M6 17h24" />
+                <path d="M6.5 14a12 12 0 0 1 23 0" />
+                <path d="M6.5 20a12 12 0 0 0 23 0" />
+                <path d="M8 11a12 12 0 0 1 20 0" />
+                <path d="M8 23a12 12 0 0 0 20 0" />
+                <path d="M11.5 8a12 12 0 0 1 13 0" />
+                <path d="M11.5 26a12 12 0 0 0 13 0" />
+                
+                <!-- Lignes de longitude (courbes verticales) -->
+                <path d="M18 5v24" />
+                <path d="M18 5a12 12 0 0 1 0 24" />
+                <path d="M18 5a12 12 0 0 0 0 24" />
+                <path d="M18 5a12 12 0 0 1-5.5 24" />
+                <path d="M18 5a12 12 0 0 0-5.5 24" />
+                <path d="M18 5a12 12 0 0 1 5.5 24" />
+                <path d="M18 5a12 12 0 0 0 5.5 24" />
+            </g>
+            
+            <!-- Petites étoiles d'éclats scintillants intégrées -->
+            <path d="M11 10.5 L11.5 11.5 L12.5 11.5 L11.5 12 L11.5 13 L11 12 L10 12 L10.5 11.5 Z" fill="#FFFFFF" opacity="0.95" />
+            <path d="M25 14 L25.3 14.7 L26 14.7 L25.4 15 L25.6 15.7 L25 15.3 L24.4 15.7 L24.6 15 Z" fill="#FFD700" opacity="0.85" />
+            
+            <!-- Point chaud de reflet lumineux spéculaire -->
+            <circle cx="13" cy="12" r="2.5" fill="#FFFFFF" opacity="0.35" filter="blur(0.5px)" />
+            <circle cx="11.5" cy="10.5" r="0.8" fill="#FFFFFF" opacity="0.9" />
         </svg>
     </div>
 
@@ -174,7 +207,7 @@
                         <span class="text-xs text-[#7C38A8] font-semibold tracking-wider">Lecture de l'ardoise...</span>
                     </div>
 
-                    <img id="menu-image" src="[https://lh3.googleusercontent.com/d/1gZezjE7bHYdkTt9yhieijumFZ2zSMWti](https://lh3.googleusercontent.com/d/1gZezjE7bHYdkTt9yhieijumFZ2zSMWti)" alt="Menu Insensément" class="w-full h-full object-cover transition-all duration-700 ease-out opacity-0" onload="handleMenuLoaded(this)" onerror="handleMenuError(this)">
+                    <img id="menu-image" src="https://lh3.googleusercontent.com/d/1gZezjE7bHYdkTt9yhieijumFZ2zSMWti" alt="Menu Insensément" class="w-full h-full object-cover transition-all duration-700 ease-out opacity-0" onload="handleMenuLoaded(this)" onerror="handleMenuError(this)">
 
                     <div class="absolute inset-0 bg-[#7C38A8]/20 opacity-0 group-hover/image:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
                         <span class="px-4 py-2 rounded-full bg-white/95 text-[#7C38A8] font-bold text-xs flex items-center gap-2 shadow-lg tracking-wider uppercase">
