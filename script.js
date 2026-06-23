@@ -143,3 +143,16 @@ function setLightMode(mode) {
         orb3.style.backgroundColor = '#BA91D6';
     }
 }
+// Écoute dynamique du chargement du menu à la fin du fichier script.js
+const menuImg = document.getElementById('menu-image');
+
+if (menuImg) {
+    // Si l'image est déjà chargée (depuis le cache)
+    if (menuImg.complete) {
+        handleMenuLoaded(menuImg);
+    } else {
+        // Sinon, on attend l'événement de chargement ou d'erreur
+        menuImg.addEventListener('load', () => handleMenuLoaded(menuImg));
+        menuImg.addEventListener('error', () => handleMenuError(menuImg));
+    }
+}
