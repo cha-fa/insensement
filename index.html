@@ -22,52 +22,83 @@
     <div id="custom-disco-cursor" class="hidden lg:flex">
         <svg class="spin-disco-ball" viewBox="0 0 36 36" width="38" height="38" fill="none" xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)">
             <defs>
-                <radialGradient id="discoGrad" cx="35%" cy="30%" r="65%">
+                <!-- Filtre de lueur pour les éclats lumineux -->
+                <filter id="discoGlow" x="-30%" y="-30%" width="160%" height="160%">
+                    <feGaussianBlur stdDeviation="1.2" result="blur" />
+                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                </filter>
+                <!-- Découpe sphérique parfaite -->
+                <clipPath id="sphereClip">
+                    <circle cx="18" cy="18" r="13" />
+                </clipPath>
+                <!-- Dégradé métallique tridimensionnel pour le volume de la sphère -->
+                <radialGradient id="silverGrad" cx="30%" cy="25%" r="70%">
                     <stop offset="0%" stop-color="#FFFFFF" />
-                    <stop offset="25%" stop-color="#F1F5F9" /> <!-- Argent ultra-brillant -->
-                    <stop offset="55%" stop-color="#CBD5E1" /> <!-- Reflets miroir -->
-                    <stop offset="85%" stop-color="#64748B" /> <!-- Acier brossé -->
-                    <stop offset="100%" stop-color="#1E1E2F" /> <!-- Ombre de volume discrète -->
+                    <stop offset="30%" stop-color="#F1F5F9" /> <!-- Argent pur -->
+                    <stop offset="60%" stop-color="#94A3B8" /> <!-- Acier brossé -->
+                    <stop offset="85%" stop-color="#475569" /> <!-- Ombrage miroir -->
+                    <stop offset="100%" stop-color="#0F172A" /> <!-- Contour de profondeur -->
+                </radialGradient>
+                <!-- Dégradé de halo pour les reflets projetés autour de la boule -->
+                <radialGradient id="haloGrad" cx="50%" cy="50%" r="50%">
+                    <stop offset="50%" stop-color="rgba(186, 145, 214, 0.35)" /> <!-- Lavande -->
+                    <stop offset="80%" stop-color="rgba(255, 215, 0, 0.2)" /> <!-- Or chaud -->
+                    <stop offset="100%" stop-color="rgba(124, 56, 168, 0)" />
                 </radialGradient>
             </defs>
+
+            <!-- Halo de reflets extérieurs autour de la boule -->
+            <circle cx="18" cy="18" r="17" fill="url(#haloGrad)" filter="url(#discoGlow)" />
             
-            <!-- Petite attache de suspension métallique en haut -->
-            <path d="M18 1.5 a2.5 2.5 0 1 0 0.001 0" stroke="#FFFFFF" stroke-width="1.2" fill="none" />
-            <rect x="16.2" y="3.5" width="3.6" height="1.8" rx="0.5" fill="#E2E8F0" stroke="#FFFFFF" stroke-width="0.5" />
-            
-            <!-- Sphère Principale -->
-            <circle cx="18" cy="17" r="12" fill="url(#discoGrad)" stroke="#FFFFFF" stroke-width="0.8" />
-            
-            <!-- Mosaïque de Facettes Miroirs 3D Courbées -->
-            <g stroke="rgba(255, 255, 255, 0.65)" stroke-width="0.45">
-                <!-- Lignes de latitude (courbes horizontales) -->
-                <path d="M6 17h24" />
-                <path d="M6.5 14a12 12 0 0 1 23 0" />
-                <path d="M6.5 20a12 12 0 0 0 23 0" />
-                <path d="M8 11a12 12 0 0 1 20 0" />
-                <path d="M8 23a12 12 0 0 0 20 0" />
-                <path d="M11.5 8a12 12 0 0 1 13 0" />
-                <path d="M11.5 26a12 12 0 0 0 13 0" />
-                
-                <!-- Lignes de longitude (courbes verticales) -->
-                <path d="M18 5v24" />
-                <path d="M18 5a12 12 0 0 1 0 24" />
-                <path d="M18 5a12 12 0 0 0 0 24" />
-                <path d="M18 5a12 12 0 0 1-5.5 24" />
-                <path d="M18 5a12 12 0 0 0-5.5 24" />
-                <path d="M18 5a12 12 0 0 1 5.5 24" />
-                <path d="M18 5a12 12 0 0 0 5.5 24" />
+            <!-- Corps Principal de la Sphère -->
+            <circle cx="18" cy="18" r="13" fill="url(#silverGrad)" />
+
+            <!-- Les petits "carrés" miroir très distinguables -->
+            <g clip-path="url(#sphereClip)">
+                <!-- Grille de facettes contrastée -->
+                <g stroke="#1E293B" stroke-width="0.8" opacity="0.85">
+                    <!-- Courbes de latitude horizontales (effet 3D bombé) -->
+                    <path d="M4 18h28" />
+                    <path d="M4.5 14 Q 18 10.5 31.5 14" />
+                    <path d="M4.5 22 Q 18 25.5 31.5 22" />
+                    <path d="M6 10 Q 18 6.5 30 10" />
+                    <path d="M6 26 Q 18 29.5 30 26" />
+                    <path d="M9 6.5 Q 18 3.5 27 6.5" />
+                    <path d="M9 29.5 Q 18 32.5 27 29.5" />
+
+                    <!-- Courbes de longitude verticales -->
+                    <path d="M18 4v28" />
+                    <path d="M13.5 4.5 Q 17.5 18 13.5 31.5" />
+                    <path d="M9.5 6 Q 16.5 18 9.5 30" />
+                    <path d="M6 8.5 Q 15.5 18 6 27.5" />
+                    
+                    <path d="M22.5 4.5 Q 18.5 18 22.5 31.5" />
+                    <path d="M26.5 6 Q 19.5 18 26.5 30" />
+                    <path d="M30 8.5 Q 20.5 18 30 27.5" />
+                </g>
+
+                <!-- Reflets de brillance individuels sur des facettes stratégiques (effet scintillement localisé) -->
+                <rect x="15" y="11" width="2" height="1.8" fill="#FFFFFF" opacity="0.8" />
+                <rect x="19" y="15" width="2" height="2" fill="#FFFFFF" opacity="0.9" />
+                <rect x="11" y="15" width="2" height="2" fill="#F8FAFC" opacity="0.7" />
+                <rect x="23" y="19" width="2" height="1.8" fill="#FFD700" opacity="0.6" />
+                <rect x="16" y="23" width="2.2" height="1.8" fill="#FFFFFF" opacity="0.8" />
+                <rect x="20" y="9" width="1.8" height="1.5" fill="#FFFFFF" opacity="0.75" />
             </g>
-            
-            <!-- Petites étoiles d'éclats scintillants argentés -->
-            <path d="M11 10.5 L11.5 11.5 L12.5 11.5 L11.5 12 L11.5 13 L11 12 L10 12 L10.5 11.5 Z" fill="#FFFFFF" opacity="0.95" />
-            <path d="M25 14 L25.3 14.7 L26 14.7 L25.4 15 L25.6 15.7 L25 15.3 L24.4 15.7 L24.6 15 Z" fill="#E2E8F0" opacity="0.85" />
-            
-            <!-- Point chaud de reflet lumineux spéculaire -->
-            <circle cx="13" cy="12" r="2.5" fill="#FFFFFF" opacity="0.35" filter="blur(0.5px)" />
-            <circle cx="11.5" cy="10.5" r="0.8" fill="#FFFFFF" opacity="0.9" />
+
+            <!-- Liseré de contour blanc pour détacher parfaitement la sphère de l'arrière-plan -->
+            <circle cx="18" cy="18" r="13" fill="none" stroke="#FFFFFF" stroke-width="0.6" opacity="0.9" />
+
+            <!-- Étoiles de scintillement externes projetées autour du globe -->
+            <!-- Étoile Or Haut-Gauche -->
+            <path d="M18 0.5 L18.8 4.2 L22 5 L18.8 5.8 L18 9.5 L17.2 5.8 L14 5 L17.2 4.2 Z" fill="#FFD700" opacity="0.9" filter="url(#discoGlow)" transform="translate(-10, 1) scale(0.65)" />
+            <!-- Étoile Blanche Droite -->
+            <path d="M18 0.5 L18.8 4.2 L22 5 L18.8 5.8 L18 9.5 L17.2 5.8 L14 5 L17.2 4.2 Z" fill="#FFFFFF" opacity="0.95" filter="url(#discoGlow)" transform="translate(14, 15) scale(0.55)" />
+            <!-- Étoile Lavande Bas-Gauche -->
+            <path d="M18 0.5 L18.8 4.2 L22 5 L18.8 5.8 L18 9.5 L17.2 5.8 L14 5 L17.2 4.2 Z" fill="#BA91D6" opacity="0.8" filter="url(#discoGlow)" transform="translate(-8, 22) scale(0.45)" />
         </svg>
     </div>
+
 
     <!-- Orbes lumineux d'ambiance animés (Faisceaux lumineux fluides) -->
     <div class="absolute top-[-10%] left-[-10%] w-[60vw] h-[60vw] rounded-full bg-[#7C38A8] ambient-glow pointer-events-none z-0" id="glow-orb-1"></div>
@@ -141,17 +172,6 @@
                         <h1 class="neon-text-brand text-5xl sm:text-6xl md:text-7xl tracking-normal lowercase py-1">insensément</h1>
                         <span class="text-xs uppercase tracking-[0.3em] text-[#BA91D6] mt-1 block font-semibold">Restaurant Sensoriel</span>
                     </div>
-                </div>
-            </div>
-
-            <div class="mb-6 flex justify-center lg:justify-start">
-                <div class="px-6 py-2 rounded-2xl bg-[#22132C] border border-white/10 shadow-2xl inline-flex items-center justify-center relative overflow-hidden group">
-                    <span class="neon-text-brand text-3xl md:text-4xl px-2">insensément</span>
-                    <svg class="spin-disco-ball ml-3" viewBox="0 0 24 24" width="26" height="26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="12" cy="12" r="9" fill="url(#discoGrad)" stroke="#FFFFFF" stroke-width="0.75" />
-                        <path d="M12 3v18M3 12h18" stroke="rgba(255,255,255,0.7)" stroke-width="0.5" />
-                    </svg>
-                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent pointer-events-none"></div>
                 </div>
             </div>
 
