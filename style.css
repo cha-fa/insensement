@@ -1,0 +1,169 @@
+/* VARIABLES DE CHARTE GRAPHIQUE */
+:root {
+    --color-beige-rose: #ECDFD4;
+    --color-violet: #7C38A8;
+    --color-lavande: #BA91D6;
+    --color-yellow: #FFD700;
+    --color-dark-text: #22132C;
+    --glow-color: rgba(124, 56, 168, 0.4);
+    --organic-radius-1: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    --organic-radius-2: 40% 60% 70% 30% / 50% 60% 30% 50%;
+    --neon-glow-intensity: 1.2;
+}
+
+/* CURSEUR DISCO VECTORIEL */
+#custom-disco-cursor {
+    pointer-events: none;
+    position: fixed;
+    width: 36px;
+    height: 36px;
+    z-index: 99999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.08s ease-out;
+    filter: drop-shadow(0 0 10px rgba(124, 56, 168, 0.6)) drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
+}
+
+@media (min-width: 1024px) {
+    body {
+        cursor: none;
+    }
+    a, button, input, textarea {
+        cursor: none;
+    }
+}
+
+/* ANIMATIONS ET EFFET NÉON */
+.neon-text-brand {
+    font-family: 'Dancing Script', cursive;
+    color: #ffffff;
+    text-shadow: 
+        0 0 calc(4px * var(--neon-glow-intensity)) #fff,
+        0 0 calc(12px * var(--neon-glow-intensity)) #BA91D6,
+        0 0 calc(22px * var(--neon-glow-intensity)) #7C38A8,
+        0 0 calc(35px * var(--neon-glow-intensity)) #7C38A8,
+        0 0 calc(50px * var(--neon-glow-intensity)) #FFD700,
+        0 0 calc(70px * var(--neon-glow-intensity)) #FFD700;
+    animation: neon-pulse 1.8s ease-in-out infinite alternate;
+}
+
+@keyframes neon-pulse {
+    0% { opacity: 0.95; }
+    100% { opacity: 1; }
+}
+
+.spin-disco-ball {
+    animation: spin 8s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.neon-header {
+    font-family: 'Dancing Script', cursive;
+    color: #7C38A8;
+    text-shadow: 0 0 4px rgba(186, 145, 214, 0.4);
+    transition: all 0.4s ease;
+}
+
+.group-header:hover .neon-header {
+    color: #ffffff;
+    text-shadow: 
+        0 0 calc(3px * var(--neon-glow-intensity)) #fff,
+        0 0 calc(8px * var(--neon-glow-intensity)) #BA91D6,
+        0 0 calc(15px * var(--neon-glow-intensity)) #7C38A8,
+        0 0 calc(25px * var(--neon-glow-intensity)) #FFD700;
+}
+
+/* DEGRADÉ DE FOND IRISÉ */
+@keyframes iridescence {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.iridescent-bg {
+    background: linear-gradient(135deg, rgba(124, 56, 168, 0.15), rgba(186, 145, 214, 0.2), rgba(226, 232, 240, 0.2), rgba(255, 215, 0, 0.15));
+    background-size: 300% 300%;
+    animation: iridescence 10s ease infinite;
+}
+
+.iridescent-border-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.65);
+    background-clip: padding-box;
+    border: 2px solid transparent;
+}
+
+.iridescent-border-card::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    z-index: -1;
+    margin: -2px; 
+    border-radius: inherit; 
+    background: linear-gradient(135deg, #7C38A8, #BA91D6, #FFD700, #E2E8F0, #7C38A8);
+    background-size: 300% 300%;
+    animation: iridescence 6s ease infinite;
+}
+
+/* LUEURS ET PROJECTEURS SENSORIELS */
+.ambient-glow {
+    filter: blur(140px);
+    opacity: 0.65;
+    transition: all 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes iridescent-flow-1 {
+    0% { transform: translate(0, 0) scale(1); background-color: #7C38A8; }
+    50% { transform: translate(60px, -40px) scale(1.15); background-color: #FFD700; }
+    100% { transform: translate(0, 0) scale(1); background-color: #7C38A8; }
+}
+@keyframes iridescent-flow-2 {
+    0% { transform: translate(0, 0) scale(1); background-color: #BA91D6; }
+    50% { transform: translate(-60px, 60px) scale(0.9); background-color: #E2E8F0; }
+    100% { transform: translate(0, 0) scale(1); background-color: #BA91D6; }
+}
+@keyframes iridescent-flow-3 {
+    0% { transform: translate(0, 0) scale(1.1); background-color: #ECDFD4; }
+    50% { transform: translate(30px, 30px) scale(0.95); background-color: #7C38A8; }
+    100% { transform: translate(0, 0) scale(1.1); background-color: #ECDFD4; }
+}
+
+body.light-iridescent #glow-orb-1 { animation: iridescent-flow-1 12s ease-in-out infinite; }
+body.light-iridescent #glow-orb-2 { animation: iridescent-flow-2 15s ease-in-out infinite; }
+body.light-iridescent #glow-orb-3 { animation: iridescent-flow-3 10s ease-in-out infinite; }
+
+/* AMBIANCE SHOW DISCO (DYNAMIQUE) */
+@keyframes disco-lightshow-1 {
+    0% { transform: translate(0, 0) scale(1); background-color: #7C38A8; }
+    33% { transform: translate(100px, -50px) scale(1.1); background-color: #FFD700; }
+    66% { transform: translate(-50px, 80px) scale(0.9); background-color: #BA91D6; }
+    100% { transform: translate(0, 0) scale(1); background-color: #7C38A8; }
+}
+@keyframes disco-lightshow-2 {
+    0% { transform: translate(0, 0) scale(1); background-color: #BA91D6; }
+    33% { transform: translate(-80px, 100px) scale(0.9); background-color: #FFD700; }
+    66% { transform: translate(120px, -40px) scale(1.1); background-color: #7C38A8; }
+    100% { transform: translate(0, 0) scale(1); background-color: #BA91D6; }
+}
+
+body.light-disco #glow-orb-1 { animation: disco-lightshow-1 6s ease-in-out infinite; }
+body.light-disco #glow-orb-2 { animation: disco-lightshow-2 6s ease-in-out infinite; }
+
+body.light-iridescent { background-color: var(--color-beige-rose); }
+body.light-warm { background-color: #F3EFE9; }
+body.light-violet { background-color: #DBD0E2; }
+body.light-disco { background-color: #24142C; color: #F3EDF7; }
+body.light-disco p { color: rgba(243, 237, 247, 0.85); }
+
+/* BLOBS */
+.organic-blob-1 {
+    border-radius: var(--organic-radius-1);
+    animation: morphing-1 14s ease-in-out infinite alternate;
+}
+@keyframes morphing-1 {
+    0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; transform: rotate(0deg) scale(1); }
+    100% { border-radius: 40% 60% 70% 30% / 50% 60% 30% 50%; transform: rotate(20deg) scale(1.1); }
+}

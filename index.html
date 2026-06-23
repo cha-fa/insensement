@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insensément — Restaurant Sensoriel & Disco Chic</title>
+    <!-- Tailwind CSS pour une mise en page fluide et responsive -->
+    <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)">
+    <link rel="preconnect" href="[https://fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin>
+    <link href="[https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Fredoka:wght@400;500;600;700&family=Dancing+Script:wght@500;600;700&display=swap](https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Fredoka:wght@400;500;600;700&family=Dancing+Script:wght@500;600;700&display=swap)" rel="stylesheet">
+    <!-- Notre feuille de style externe -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="light-iridescent min-h-screen flex flex-col relative antialiased selection:bg-[#7C38A8] selection:text-white">
+
+    <!-- Curseur Boule Disco Vectoriel (Masqué sur mobile/tablette) -->
+    <div id="custom-disco-cursor" class="hidden lg:flex">
+        <svg class="spin-disco-ball" viewBox="0 0 24 24" width="36" height="36" fill="none" xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)">
+            <defs>
+                <radialGradient id="discoGrad" cx="50%" cy="50%" r="50%" fx="30%" fy="30%">
+                    <stop offset="0%" stop-color="#FFFFFF" />
+                    <stop offset="35%" stop-color="#FFD700" />
+                    <stop offset="70%" stop-color="#BA91D6" />
+                    <stop offset="100%" stop-color="#7C38A8" />
+                </radialGradient>
+            </defs>
+            <circle cx="12" cy="12" r="9" fill="url(#discoGrad)" stroke="#FFFFFF" stroke-width="0.75" />
+            <path d="M12 3v18M3 12h18M5.5 5.5l13 13M5.5 18.5l13-13" stroke="rgba(255,255,255,0.65)" stroke-width="0.35" />
+            <path d="M12 3a9 9 0 0 1 0 18M12 3a9 9 0 0 0 0 18" stroke="rgba(255,255,255,0.45)" stroke-width="0.35" />
+            <path d="M3 12a9 9 0 0 1 18 0M3 12a9 9 0 0 0 18 0" stroke="rgba(255,255,255,0.45)" stroke-width="0.35" />
+        </svg>
+    </div>
+
+    <!-- Orbes lumineux d'ambiance animés (Faisceaux lumineux fluides) -->
+    <div class="absolute top-[-10%] left-[-10%] w-[60vw] h-[60vw] rounded-full bg-[#7C38A8] ambient-glow pointer-events-none z-0" id="glow-orb-1"></div>
+    <div class="absolute top-[30%] right-[-10%] w-[55vw] h-[55vw] rounded-full bg-[#FFD700] ambient-glow pointer-events-none z-0" id="glow-orb-2"></div>
+    <div class="absolute bottom-[-10%] left-[5%] w-[50vw] h-[50vw] rounded-full bg-[#BA91D6] ambient-glow pointer-events-none z-0" id="glow-orb-3"></div>
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="w-full py-6 px-6 md:px-12 flex justify-between items-center relative z-10 max-w-7xl mx-auto">
+        <a href="#" class="flex items-center gap-3 group-header">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center border-2 border-[#7C38A8] bg-white/60 backdrop-blur-sm relative overflow-hidden group-header:scale-110 transition-transform">
+                <svg class="spin-disco-ball" viewBox="0 0 24 24" width="22" height="22" fill="none" xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)">
+                    <circle cx="12" cy="12" r="9" fill="url(#discoGrad)" stroke="#7C38A8" stroke-width="0.75" />
+                    <path d="M12 3v18M3 12h18" stroke="rgba(255,255,255,0.7)" stroke-width="0.5" />
+                </svg>
+            </div>
+            <span class="neon-header text-3xl md:text-4xl tracking-wide lowercase pt-1 block">insensément</span>
+        </a>
+
+        <!-- Sélecteur d'ambiance lumineuse tactile -->
+        <div class="hidden md:flex items-center gap-1.5 plexiglas-dark px-3 py-1.5 rounded-full text-xs">
+            <span class="text-[#7C38A8] font-bold mr-2 uppercase tracking-wider text-[10px] pl-1">Éclairage :</span>
+            <button onclick="setLightMode('iridescent')" id="btn-iridescent" class="px-3.5 py-1.5 rounded-full bg-gradient-to-r from-[#7C38A8] to-[#BA91D6] text-white font-semibold transition-all shadow-md">
+                ✨ Irisé Caméléon
+            </button>
+            <button onclick="setLightMode('disco')" id="btn-disco" class="px-3.5 py-1.5 rounded-full text-[#7C38A8]/90 hover:bg-white/40 font-medium transition-all">
+                🪩 Show Disco
+            </button>
+            <button onclick="setLightMode('warm')" id="btn-warm" class="px-3.5 py-1.5 rounded-full text-[#7C38A8]/90 hover:bg-white/40 font-medium transition-all">
+                ☀ Lumière Chaude
+            </button>
+            <button onclick="setLightMode('violet')" id="btn-violet" class="px-3.5 py-1.5 rounded-full text-[#7C38A8]/90 hover:bg-white/40 font-medium transition-all">
+                🔮 Violet Profond
+            </button>
+        </div>
+
+        <div>
+            <a href="[https://www.google.com](https://www.google.com)" target="_blank" class="btn-reserve-primary text-white px-5 md:px-7 py-3 rounded-full font-bold text-xs md:text-sm tracking-wider uppercase inline-flex items-center gap-2">
+                <span>Réserver</span>
+                <i data-lucide="external-link" class="w-4 h-4"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- Contrôles Ambiances Mobiles -->
+    <div class="md:hidden flex justify-center py-2 px-4 relative z-10">
+        <div class="flex items-center gap-1 bg-white/65 backdrop-blur-md p-1 rounded-full border border-white/60 shadow-md w-full max-w-sm justify-around">
+            <button onclick="setLightMode('iridescent')" id="btn-iridescent-m" class="px-3 py-1.5 rounded-full text-[11px] bg-gradient-to-r from-[#7C38A8] to-[#BA91D6] text-white font-semibold transition-all shadow-sm">
+                ✨ Irisé
+            </button>
+            <button onclick="setLightMode('disco')" id="btn-disco-m" class="px-3 py-1.5 rounded-full text-[11px] text-[#7C38A8] font-medium transition-all">
+                🪩 Disco
+            </button>
+            <button onclick="setLightMode('warm')" id="btn-warm-m" class="px-3 py-1.5 rounded-full text-[11px] text-[#7C38A8] font-medium transition-all">
+                ☀ Chaude
+            </button>
+            <button onclick="setLightMode('violet')" id="btn-violet-m" class="px-3 py-1.5 rounded-full text-[11px] text-[#7C38A8] font-medium transition-all">
+                🔮 Violet
+            </button>
+        </div>
+    </div>
+
+    <!-- MAIN SECTION -->
+    <main class="flex-grow relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-8 md:py-16 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+        
+        <!-- Colonne Gauche : Identité & Concept -->
+        <div class="lg:col-span-5 flex flex-col justify-center text-center lg:text-left">
+            <div class="mb-6 relative flex justify-center lg:justify-start">
+                <div class="relative w-full max-w-[320px] md:max-w-[400px] lg:max-w-[440px]">
+                    <img id="main-logo-image" src="logo-insensement.png" alt="Logo Insensément" class="w-full h-auto object-contain drop-shadow-[0_10px_20px_rgba(124,56,168,0.3)] hover:scale-102 transition-transform duration-500" onerror="handleLogoError(this)">
+                    <div id="logo-fallback" class="hidden flex-col items-center lg:items-start py-4">
+                        <h1 class="neon-text-brand text-5xl sm:text-6xl md:text-7xl tracking-normal lowercase py-1">insensément</h1>
+                        <span class="text-xs uppercase tracking-[0.3em] text-[#BA91D6] mt-1 block font-semibold">Restaurant Sensoriel</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-6 flex justify-center lg:justify-start">
+                <div class="px-6 py-2 rounded-2xl bg-[#22132C] border border-white/10 shadow-2xl inline-flex items-center justify-center relative overflow-hidden group">
+                    <span class="neon-text-brand text-3xl md:text-4xl px-2">insensément</span>
+                    <svg class="spin-disco-ball ml-3" viewBox="0 0 24 24" width="26" height="26" fill="none" xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)">
+                        <circle cx="12" cy="12" r="9" fill="url(#discoGrad)" stroke="#FFFFFF" stroke-width="0.75" />
+                        <path d="M12 3v18M3 12h18" stroke="rgba(255,255,255,0.7)" stroke-width="0.5" />
+                    </svg>
+                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent pointer-events-none"></div>
+                </div>
+            </div>
+
+            <h2 class="font-title text-3xl sm:text-4xl md:text-5xl font-bold text-[#7C38A8] mb-6 leading-tight">
+                Un lieu sensible, <br class="hidden sm:inline">étrange, doux & vivant.
+            </h2>
+
+            <p class="text-base sm:text-lg font-normal text-[#22132C]/85 leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0">
+                La célébration de la différence à travers une cuisine intuitive et vibrante. Une expérience unique, guidée par l'ombre et la lumière de nos assiettes.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center mb-10 w-full max-w-md mx-auto lg:mx-0">
+                <a href="[https://www.google.com](https://www.google.com)" target="_blank" class="btn-reserve-primary text-white w-full sm:w-auto px-8 py-4 rounded-full font-bold tracking-wider text-xs md:text-sm text-center flex items-center justify-center gap-3">
+                    <span>Réserver votre table</span>
+                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </a>
+                <a href="#menu-week" class="w-full sm:w-auto px-6 py-4 rounded-full border-2 border-[#7C38A8]/30 hover:border-[#7C38A8] font-bold text-xs md:text-sm text-[#7C38A8] text-center transition-all bg-white/40 backdrop-blur-sm tracking-wider uppercase">
+                    Découvrir l'Ardoise
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left max-w-md mx-auto lg:mx-0 border-t border-[#7C38A8]/15 pt-6">
+                <div class="flex items-start gap-3">
+                    <span class="p-1 rounded-full bg-[#7C38A8]/15 text-[#7C38A8] mt-0.5">
+                        <i data-lucide="sparkles" class="w-4 h-4"></i>
+                    </span>
+                    <p class="text-xs text-[#22132C]/90"><strong class="text-[#7C38A8] font-semibold">Tonalités Irisées</strong> pour le changement permanent de point de vue.</p>
+                </div>
+                <div class="flex items-start gap-3">
+                    <span class="p-1.5 rounded-full bg-[#BA91D6]/20 text-[#7C38A8] mt-0.5 flex items-center justify-center">
+                        <i data-lucide="sparkle" class="w-4 h-4 text-[#7C38A8]"></i>
+                    </span>
+                    <p class="text-xs text-[#22132C]/90"><strong class="text-[#7C38A8] font-semibold">Miroirs & Facettes</strong> pour refléter l'énergie vibrante et sensorielle du lieu.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Colonne Droite : Le Menu Dynamique Google Drive -->
+        <div class="lg:col-span-7 flex flex-col items-center justify-center relative mt-6 lg:mt-0" id="menu-week">
+            <div class="relative w-full max-w-[480px] rounded-[2.5rem] p-4 iridescent-border-card shadow-2xl transition-all duration-700 hover:scale-[1.02]">
+                <div class="absolute -top-3 -right-3 w-16 h-16 organic-blob-1 bg-[#FFD700] flex items-center justify-center border-2 border-white shadow-lg z-10">
+                    <span class="spin-disco-ball text-2xl">✨</span>
+                </div>
+
+                <div class="text-center pt-3 pb-5">
+                    <h3 class="font-title text-xl md:text-2xl font-bold text-[#7C38A8] tracking-wide">L'Ardoise de la Semaine</h3>
+                    <p class="text-[10px] md:text-xs text-[#7C38A8]/80 mt-1 uppercase tracking-[0.2em] font-semibold">Cuisine Intuitive renouvelée</p>
+                </div>
+
+                <div class="relative aspect-[3/4] w-full rounded-[2rem] overflow-hidden bg-[#ECDFD4]/60 border border-white/60 group/image">
+                    <div id="menu-loader" class="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-[#ECDFD4]/90 z-20">
+                        <div class="w-9 h-9 rounded-full border-4 border-[#7C38A8]/20 border-t-[#7C38A8] animate-spin"></div>
+                        <span class="text-xs text-[#7C38A8] font-semibold tracking-wider">Lecture de l'ardoise...</span>
+                    </div>
+
+                    <img id="menu-image" src="[https://lh3.googleusercontent.com/d/1gZezjE7bHYdkTt9yhieijumFZ2zSMWti](https://lh3.googleusercontent.com/d/1gZezjE7bHYdkTt9yhieijumFZ2zSMWti)" alt="Menu Insensément" class="w-full h-full object-cover transition-all duration-700 ease-out opacity-0" onload="handleMenuLoaded(this)" onerror="handleMenuError(this)">
+
+                    <div class="absolute inset-0 bg-[#7C38A8]/20 opacity-0 group-hover/image:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                        <span class="px-4 py-2 rounded-full bg-white/95 text-[#7C38A8] font-bold text-xs flex items-center gap-2 shadow-lg tracking-wider uppercase">
+                            <i data-lucide="maximize" class="w-4 h-4"></i> Agrandir l'image
+                        </span>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between mt-4 px-2">
+                    <div class="text-xs text-[#22132C]/70 flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse"></span>
+                        <span class="font-medium">Créations fraîches du jour</span>
+                    </div>
+                    <button onclick="openMenuInNewTab()" class="text-xs font-bold text-[#7C38A8] hover:text-[#BA91D6] flex items-center gap-1 transition-colors uppercase tracking-wider">
+                        <span>Agrandir</span>
+                        <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                    </button>
+                </div>
+
+                <!-- Fallback si l'image Google Drive est bloquée ou lente -->
+                <div id="menu-error-fallback" class="hidden absolute inset-0 bg-[#ECDFD4]/95 p-8 flex-col justify-between rounded-[2.5rem] border-2 border-[#BA91D6]">
+                    <div class="text-center">
+                        <span class="text-[10px] font-bold uppercase tracking-[0.25em] text-[#7C38A8]/70">Inspiration du Moment</span>
+                        <h4 class="font-title text-2xl font-bold text-[#7C38A8] mt-2">L'Ardoise Ephémère</h4>
+                        <div class="w-10 h-0.5 bg-[#FFD700] mx-auto my-3"></div>
+                    </div>
+                    <div class="space-y-5 my-auto text-center">
+                        <div>
+                            <p class="font-bold text-[#7C38A8] text-base">La Rosée du Matin</p>
+                            <p class="text-xs text-[#22132C]/80 mt-1">Infusion d'herbes folles glacées, légumes croquants.</p>
+                        </div>
+                        <div>
+                            <p class="font-bold text-[#7C38A8] text-base">L'Étrange Clair-Obscur</p>
+                            <p class="text-xs text-[#22132C]/80 mt-1">Contrastes chauds de champignons sauvages.</p>
+                        </div>
+                        <div>
+                            <p class="font-bold text-[#7C38A8] text-base">L'Illusion Sucrée</p>
+                            <p class="text-xs text-[#22132C]/80 mt-1">Ganache soyeuse à la lavande, larmes d'iridescence.</p>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <a href="[https://lh3.googleusercontent.com/d/1gZezjE7bHYdkTt9yhieijumFZ2zSMWti](https://lh3.googleusercontent.com/d/1gZezjE7bHYdkTt9yhieijumFZ2zSMWti)" target="_blank" class="px-5 py-2.5 rounded-full bg-[#7C38A8] text-white text-xs font-bold inline-flex items-center gap-1.5 shadow-sm">
+                            <span>Consulter l'image en direct</span>
+                            <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- SECTION INFOS PRATIQUES -->
+    <section class="relative z-10 max-w-7xl mx-auto w-full px-6 md:px-12 py-10 border-t border-[#7C38A8]/15 mt-10 bg-white/20 backdrop-blur-md rounded-t-[2rem]">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Horaires -->
+            <div class="flex gap-4 p-4 rounded-2xl hover:bg-white/30 transition-all">
+                <div class="w-12 h-12 rounded-2xl flex items-center justify-center bg-white border border-[#BA91D6]/30 text-[#7C38A8] flex-shrink-0 shadow-sm">
+                    <i data-lucide="clock" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <h4 class="font-title font-bold text-base text-[#7C38A8] mb-2 uppercase tracking-wider">Les Instants</h4>
+                    <div class="text-xs sm:text-sm text-[#22132C]/90 space-y-1.5">
+                        <p class="flex justify-between gap-4">
+                            <span>Mardi - Samedi :</span> 
+                            <span class="font-semibold text-right">12h00 - 14h30<br>19h00 - 22h30</span>
+                        </p>
+                        <p class="flex justify-between gap-4 text-[#22132C]/50">
+                            <span>Dimanche - Lundi :</span> 
+                            <span class="text-right">Fermé</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Adresse -->
+            <div class="flex gap-4 p-4 rounded-2xl hover:bg-white/30 transition-all">
+                <div class="w-12 h-12 rounded-2xl flex items-center justify-center bg-white border border-[#BA91D6]/30 text-[#7C38A8] flex-shrink-0 shadow-sm">
+                    <i data-lucide="map-pin" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <h4 class="font-title font-bold text-base text-[#7C38A8] mb-2 uppercase tracking-wider">L'Écrin</h4>
+                    <p class="text-xs sm:text-sm text-[#22132C]/90 leading-relaxed mb-3 font-medium">14 Rue du Sens, 75011 Paris</p>
+                    <a href="[https://maps.google.com](https://maps.google.com)" target="_blank" class="text-xs font-bold text-[#7C38A8] hover:text-[#BA91D6] inline-flex items-center gap-1.5 uppercase tracking-wider">
+                        <span>Ouvrir dans Google Maps</span>
+                        <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Contact -->
+            <div class="flex gap-4 p-4 rounded-2xl hover:bg-white/30 transition-all">
+                <div class="w-12 h-12 rounded-2xl flex items-center justify-center bg-white border border-[#BA91D6]/30 text-[#7C38A8] flex-shrink-0 shadow-sm">
+                    <i data-lucide="phone" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <h4 class="font-title font-bold text-base text-[#7C38A8] mb-2 uppercase tracking-wider">Prendre Contact</h4>
+                    <p class="text-xs sm:text-sm text-[#22132C]/90 mb-1.5">
+                        Téléphone : <a href="tel:+33142748912" class="font-bold hover:underline text-[#7C38A8]">+33 (0)1 42 74 89 12</a>
+                    </p>
+                    <p class="text-xs sm:text-sm text-[#22132C]/90">
+                        Email : <a href="mailto:contact@insensement.fr" class="font-bold hover:underline text-[#7C38A8]">contact@insensement.fr</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="w-full py-8 text-center text-xs text-[#7C38A8]/85 relative z-10 border-t border-[#7C38A8]/10">
+        <p>© 2026 Insensément. Tous droits réservés.</p>
+        <p class="mt-2 font-medium italic">"Insensément, c'est une expérience à part entière." ♡</p>
+    </footer>
+
+    <!-- Lucide Icons Library -->
+    <script src="[https://unpkg.com/lucide@latest](https://unpkg.com/lucide@latest)"></script>
+    <!-- Notre fichier JavaScript Externe -->
+    <script src="script.js"></script>
+</body>
+</html>
