@@ -194,6 +194,7 @@ body.light-disco p { color: rgba(243, 237, 247, 0.85); }
 
 
 /* Pulsation néon/or douce pour attirer le regard sans agresser */
+/* Pulsation néon/or douce pour attirer le regard sans agresser */
 @keyframes button-pulse-glow {
     0% {
         box-shadow: 
@@ -212,7 +213,7 @@ body.light-disco p { color: rgba(243, 237, 247, 0.85); }
     100% {
         box-shadow: 
             0 6px 20px rgba(124, 56, 168, 0.45), 
-                    0 0 12px rgba(255, 215, 0, 0.35),
+            0 0 12px rgba(255, 215, 0, 0.35),
             0 0 0 0 rgba(255, 215, 0, 0),
             0 0 0 0 rgba(124, 56, 168, 0);
     }
