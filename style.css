@@ -15,6 +15,9 @@ CHARTE GRAPHIQUE ET VARIABLES PERSONNALISÉES
     body {
         font-family: 'Kalam', cursive;
         background-color: var(--color-beige-rose);
+        position: relative;
+        z-index: 1;
+        isolation: isolate; /* Crée un contexte d'empilement propre qui isole les orbes en dessous */
     }
 
     /* Amatic SC en gras maximum pour la marque insensément */
@@ -121,130 +124,82 @@ CHARTE GRAPHIQUE ET VARIABLES PERSONNALISÉES
         animation: iridescence 6s ease infinite;
     }
 
-    /* LUEURS ET ÉCLAIRAGES SENSORIELS MOBILES & DESKTOP */
+/* ==========================================
+ORBES LUMINEUX IRIDESCENTS DE FOND ANIMÉS
+========================================== */
     .ambient-glow {
-        /* Flou plus léger sur mobile pour garder l'effet de dégradé vibrant sans décoloration */
-        filter: blur(60px); 
-        opacity: 0.75;
-        transition: all 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(35px); /* Flou optimisé par défaut pour mobile */
+        opacity: 0.45;
+        mix-blend-mode: multiply;
+        pointer-events: none;
+        z-index: -10; /* Force l'arrière-plan absolu sous le body */
+        will-change: transform; /* Optimisation de rendu pour le navigateur */
+        transform: translate3d(0, 0, 0); /* Force l'accélération matérielle (GPU) */
     }
 
-    @media (min-width: 768px) {
+    /* Flou et opacité augmentés sur plus grands écrans */
+    @media (min-width: 1024px) {
         .ambient-glow {
-            filter: blur(140px); /* Flou d'ambiance plus grand sur desktop */
+            filter: blur(60px);
+            opacity: 0.35;
         }
     }
 
+    #glow-orb-1 {
+        top: -10%;
+        left: -10%;
+        width: 75vw;
+        height: 75vw;
+        background: radial-gradient(circle, rgba(124, 56, 168, 0.6) 0%, rgba(255, 255, 255, 0) 70%);
+        animation: iridescent-flow-1 12s ease-in-out infinite alternate;
+    }
+
+    @media (min-width: 1024px) {
+        #glow-orb-1 {
+            width: 55vw;
+            height: 55vw;
+        }
+    }
+
+    #glow-orb-2 {
+        bottom: -10%;
+        right: -10%;
+        width: 80vw;
+        height: 80vw;
+        background: radial-gradient(circle, rgba(255, 215, 0, 0.4) 0%, rgba(255, 255, 255, 0) 70%);
+        animation: iridescent-flow-2 15s ease-in-out infinite alternate;
+    }
+
+    @media (min-width: 1024px) {
+        #glow-orb-2 {
+            width: 60vw;
+            height: 60vw;
+        }
+    }
+
+    #glow-orb-3 {
+        top: 40%;
+        left: 50%;
+        width: 70vw;
+        height: 70vw;
+        background: radial-gradient(circle, rgba(186, 145, 214, 0.4) 0%, rgba(255, 255, 255, 0) 70%);
+        animation: iridescent-flow-3 10s ease-in-out infinite alternate;
+    }
+
+    @media (min-width: 1024px) {
+        #glow-orb-3 {
+            width: 45vw;
+            height: 45vw;
+        }
+    }
+
+    /* Animations fluides utilisant translate3d pour éviter les calculs lourds de couches sur mobile */
     @keyframes iridescent-flow-1 {
-        0% { transform: translate(0, 0) scale(1); background-color: #7C38A8; }
-        50% { transform: translate(40px, -30px) scale(1.2); background-color: #FFD700; }
-        100% { transform: translate(0, 0) scale(1); background-color: #7C38A8; }
+        0% { transform: translate3d(0, 0, 0) scale(1); }
+        100% { transform: translate3d(8%, 12%, 0) scale(1.12); }
     }
+
     @keyframes iridescent-flow-2 {
-        0% { transform: translate(0, 0) scale(1); background-color: #BA91D6; }
-        50% { transform: translate(-40px, 40px) scale(1.1); background-color: #E2E8F0; }
-        100% { transform: translate(0, 0) scale(1); background-color: #BA91D6; }
-    }
-    @keyframes iridescent-flow-3 {
-        0% { transform: translate(0, 0) scale(1.1); background-color: #ECDFD4; }
-        50% { transform: translate(25px, 25px) scale(1.05); background-color: #7C38A8; }
-        100% { transform: translate(0, 0) scale(1.1); background-color: #ECDFD4; }
-    }
-
-    /* Animation activée sur toutes les tailles d'écran ! */
-    #glow-orb-1 { animation: iridescent-flow-1 10s ease-in-out infinite; }
-    #glow-orb-2 { animation: iridescent-flow-2 12s ease-in-out infinite; }
-    #glow-orb-3 { animation: iridescent-flow-3 8s ease-in-out infinite; }
-
-    /* BLOBS */
-    .organic-blob-1 {
-        border-radius: var(--organic-radius-1);
-        animation: morphing-1 14s ease-in-out infinite alternate;
-    }
-    @keyframes morphing-1 {
-        0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; transform: rotate(0deg) scale(1); }
-        100% { border-radius: 40% 60% 70% 30% / 50% 60% 30% 50%; transform: rotate(20deg) scale(1.1); }
-    }
-
-    /* BOUTON RÉSERVE */
-    .btn-reserve-primary {
-        background: linear-gradient(135deg, #7C38A8, #BA91D6, #FFD700, #7C38A8);
-        background-size: 300% 300%;
-        animation: iridescence 6s ease infinite;
-        border: 2px solid rgba(255, 255, 255, 0.75);
-        color: #ffffff;
-        font-weight: 800;
-        letter-spacing: 0.05em;
-        text-shadow: 0 1px 3px rgba(34, 19, 44, 0.4);
-        box-shadow: 
-            0 6px 20px rgba(124, 56, 168, 0.45), 
-            0 0 12px rgba(255, 215, 0, 0.35);
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    .btn-reserve-primary:hover {
-        transform: translateY(-3px) scale(1.06);
-        border-color: rgba(255, 255, 255, 0.95);
-        box-shadow: 
-            0 14px 35px rgba(124, 56, 168, 0.6), 
-            0 0 25px rgba(255, 215, 0, 0.7);
-    }
-
-    @keyframes button-pulse-glow {
-        0% {
-            box-shadow: 
-                0 6px 20px rgba(124, 56, 168, 0.45), 
-                0 0 12px rgba(255, 215, 0, 0.35),
-                0 0 0 0 rgba(255, 215, 0, 0.45),
-                0 0 0 0 rgba(124, 56, 168, 0.3);
-        }
-        70% {
-            box-shadow: 
-                0 6px 20px rgba(124, 56, 168, 0.45), 
-                0 0 12px rgba(255, 215, 0, 0.35),
-                0 0 0 12px rgba(255, 215, 0, 0),
-                0 0 0 18px rgba(124, 56, 168, 0);
-        }
-        100% {
-            box-shadow: 
-                0 6px 20px rgba(124, 56, 168, 0.45), 
-                0 0 12px rgba(255, 215, 0, 0.35),
-                0 0 0 0 rgba(255, 215, 0, 0),
-                0 0 0 0 rgba(124, 56, 168, 0);
-        }
-    }
-
-    .btn-glow-pulse {
-        animation: button-pulse-glow 2.2s infinite;
-    }
-
-    /* ANIMATION SCINTILLEMENT DES PAILLETTES DÉLICATES EN LIBERTÉ */
-    @keyframes sparkle-delicate {
-        0%, 100% {
-            transform: scale(0.65) rotate(0deg);
-            opacity: 0.4;
-            filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.3));
-        }
-        50% {
-            transform: scale(1.15) rotate(15deg);
-            opacity: 1;
-            filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.8));
-        }
-    }
-
-    .sparkle-item {
-        transform-box: fill-box;
-        transform-origin: center;
-        will-change: transform, opacity;
-    }
-
-    .sparkle-1 { animation: sparkle-delicate 2s ease-in-out infinite; }
-    .sparkle-2 { animation: sparkle-delicate 1.6s ease-in-out infinite 0.3s; }
-    .sparkle-3 { animation: sparkle-delicate 2.4s ease-in-out infinite 0.6s; }
-    .sparkle-4 { animation: sparkle-delicate 1.9s ease-in-out infinite 0.9s; }
-    .sparkle-5 { animation: sparkle-delicate 2.2s ease-in-out infinite 1.2s; }
-@media (max-width: 1023px) {
-    #glow-orb-1, #glow-orb-2, #glow-orb-3 {
-        display: none !important;
-    }
-}
+        0% { transform: translate3d(
