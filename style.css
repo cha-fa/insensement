@@ -22,6 +22,7 @@ CHARTE GRAPHIQUE ET VARIABLES PERSONNALISÉES
         font-family: 'Amatic SC', cursive;
         font-weight: 700;
         letter-spacing: 0.05em;
+        -webkit-text-stroke: 1px currentColor;
     }
 
     /* CURSEUR DISCO VECTORIEL */
@@ -54,6 +55,18 @@ CHARTE GRAPHIQUE ET VARIABLES PERSONNALISÉES
             0 0 25px #7C38A8,
             0 0 45px #FFD700;
         animation: neon-pulse 1.8s ease-in-out infinite alternate;
+        transition: text-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.4s ease;
+    }
+
+    .neon-text-brand:hover {
+        transform: scale(1.03);
+        text-shadow: 
+            0 0 12px #fff,
+            0 0 28px #BA91D6,
+            0 0 48px #7C38A8,
+            0 0 75px #7C38A8,
+            0 0 110px #FFD700,
+            0 0 150px #FFD700;
     }
 
     @keyframes neon-pulse {
