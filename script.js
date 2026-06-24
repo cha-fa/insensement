@@ -1,5 +1,5 @@
 // ==========================================
-// GESTIONNAIRES DE SECURS / ETATS DES IMAGES
+// GESTIONNAIRES DE SECOURS / ETATS DES IMAGES
 // ==========================================
 
 /**
@@ -45,7 +45,20 @@ function openMenuInNewTab() {
 
 
 // ==========================================
-// INITIALISATION DES ICONES & EVENEMENTS IMAGES
+// CONFIGURATION DU CURSEUR ET DES PAILLETTES
+// ==========================================
+let mouseX = 0;
+let mouseY = 0;
+let cursorX = 0;
+let cursorY = 0;
+let discoCursor = null;
+
+// Détection de l'appareil : on n'active le curseur que sur grand écran (PC)
+const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
+
+
+// ==========================================
+// INITIALISATION GLOBALE AU CHARGEMENT DU DOM
 // ==========================================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -64,38 +77,48 @@ document.addEventListener('DOMContentLoaded', () => {
             menuImg.addEventListener('error', () => handleMenuError(menuImg));
         }
     }
-});
 
+    // Activation des fonctionnalités d'effets visuels uniquement sur PC
+    if (isDesktop) {
+        discoCursor = document.getElementById('custom-disco-cursor');
+        
+        // Initialisation des positions au centre de l'écran par défaut
+        mouseX = window.innerWidth / 2;
+        mouseY = window.innerHeight / 2;
+        cursorX = mouseX;
+        cursorY = mouseY;
 
-// ==========================================
-// CURSEUR BOULE DISCO INTERACTIF & PAILLETTES
-// ==========================================
-const discoCursor = document.getElementById('custom-disco-cursor');
-let mouseX = window.innerWidth / 2;
-let mouseY = window.innerHeight / 2;
-let cursorX = window.innerWidth / 2;
-let cursorY = window.innerHeight / 2;
+        // Suivi de la souris au mouvement
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            // Scintillements fluides légers au mouvement
+            if (Math.random() < 0.22) {
+                createSparkle(e.clientX, e.clientY);
+            }
+        });
 
-// Suivi de la souris au mouvement
-document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    
-    // Scintillements fluides légers au mouvement
-    if (Math.random() < 0.22) {
-        createSparkle(e.clientX, e.clientY);
+        // Lancement de l'animation fluide d'inertie
+        animateCursor();
     }
 });
 
-// Explosion magique d'étoiles colorées au clic !
+
+// Explosion magique d'étoiles colorées au clic ! (Fonctionne partout)
 document.addEventListener('click', (e) => {
     for (let i = 0; i < 10; i++) {
         createSparkle(e.clientX, e.clientY, true);
     }
 });
 
-// Animation fluide (effet d'inertie de la boule disco)
+
+/**
+ * Animation fluide (effet d'inertie de la boule disco)
+ */
 function animateCursor() {
+    if (!isDesktop) return;
+
     cursorX += (mouseX - cursorX) * 0.16;
     cursorY += (mouseY - cursorY) * 0.16;
     
@@ -105,7 +128,7 @@ function animateCursor() {
     }
     requestAnimationFrame(animateCursor);
 }
-animateCursor();
+
 
 /**
  * Crée un élément de paillette magique temporaire à une coordonnée donnée
