@@ -1,30 +1,100 @@
-// Initialisation des icônes Lucide
-lucide.createIcons();
+// ==========================================
+// GESTIONNAIRES DE SECURS / ETATS DES IMAGES
+// ==========================================
+
+/**
+ * Gère l'absence ou l'erreur de chargement du logo principal
+ * en affichant un logo textuel stylisé de remplacement.
+ */
+function handleLogoError(img) {
+    img.style.display = 'none';
+    const fallback = document.getElementById('logo-fallback');
+    if (fallback) fallback.classList.remove('hidden');
+}
+
+/**
+ * Masque le loader une fois que l'image de l'ardoise
+ * est entièrement chargée et l'affiche avec une transition fluide.
+ */
+function handleMenuLoaded(img) {
+    const loader = document.getElementById('menu-loader');
+    if (loader) loader.classList.add('hidden');
+    img.classList.remove('opacity-0');
+}
+
+/**
+ * Gère les cas où l'ardoise Google Drive est bloquée ou inaccessible
+ * en affichant une ardoise textuelle alternative.
+ */
+function handleMenuError(img) {
+    const loader = document.getElementById('menu-loader');
+    if (loader) loader.classList.add('hidden');
+    const fallback = document.getElementById('menu-error-fallback');
+    if (fallback) fallback.classList.remove('hidden');
+}
+
+/**
+ * Ouvre l'image de l'ardoise dans un nouvel onglet pour l'agrandir.
+ */
+function openMenuInNewTab() {
+    const menuImg = document.getElementById('menu-image');
+    if (menuImg && menuImg.src) {
+        window.open(menuImg.src, "_blank");
+    }
+}
+
 
 // ==========================================
-// CURSEUR BOULE DISCO INTERACTIF
+// INITIALISATION DES ICONES & EVENEMENTS IMAGES
+// ==========================================
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialisation globale des icônes Lucide (chargé via CDN sur le HTML)
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+
+    // Branchement dynamique des événements de chargement du menu
+    const menuImg = document.getElementById('menu-image');
+    if (menuImg) {
+        if (menuImg.complete) {
+            handleMenuLoaded(menuImg);
+        } else {
+            menuImg.addEventListener('load', () => handleMenuLoaded(menuImg));
+            menuImg.addEventListener('error', () => handleMenuError(menuImg));
+        }
+    }
+});
+
+
+// ==========================================
+// CURSEUR BOULE DISCO INTERACTIF & PAILLETTES
 // ==========================================
 const discoCursor = document.getElementById('custom-disco-cursor');
-let mouseX = 0, mouseY = 0;
-let cursorX = 0, cursorY = 0;
+let mouseX = window.innerWidth / 2;
+let mouseY = window.innerHeight / 2;
+let cursorX = window.innerWidth / 2;
+let cursorY = window.innerHeight / 2;
 
+// Suivi de la souris au mouvement
 document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
     
-    // Scintillements fluides au mouvement
+    // Scintillements fluides légers au mouvement
     if (Math.random() < 0.22) {
         createSparkle(e.clientX, e.clientY);
     }
 });
 
+// Explosion magique d'étoiles colorées au clic !
 document.addEventListener('click', (e) => {
-    // Explosion magique d'étoiles au clic
     for (let i = 0; i < 10; i++) {
         createSparkle(e.clientX, e.clientY, true);
     }
 });
 
+// Animation fluide (effet d'inertie de la boule disco)
 function animateCursor() {
     cursorX += (mouseX - cursorX) * 0.16;
     cursorY += (mouseY - cursorY) * 0.16;
@@ -37,6 +107,9 @@ function animateCursor() {
 }
 animateCursor();
 
+/**
+ * Crée un élément de paillette magique temporaire à une coordonnée donnée
+ */
 function createSparkle(x, y, isExplosion = false) {
     const sparkle = document.createElement('div');
     sparkle.className = 'pointer-events-none fixed z-[99999] text-xs select-none';
@@ -65,94 +138,4 @@ function createSparkle(x, y, isExplosion = false) {
     }, 20);
 
     setTimeout(() => { sparkle.remove(); }, 900);
-}
-
-// Fallbacks de secours du menu
-function handleLogoError(img) {
-    img.style.display = 'none';
-    document.getElementById('logo-fallback').classList.remove('hidden');
-}
-
-function handleMenuLoaded(img) {
-    document.getElementById('menu-loader').classList.add('hidden');
-    img.classList.remove('opacity-0');
-}
-
-function handleMenuError(img) {
-    document.getElementById('menu-loader').classList.add('hidden');
-    document.getElementById('menu-error-fallback').classList.remove('hidden');
-}
-
-function openMenuInNewTab() {
-    const menuImg = document.getElementById('menu-image');
-    window.open(menuImg.src, "_blank");
-}
-
-// ==========================================
-// CONTRÔLEUR D'AMBIANCE DE LA PIÈCE
-// ==========================================
-function setLightMode(mode) {
-    document.body.classList.remove('light-warm', 'light-violet', 'light-iridescent', 'light-disco');
-    
-    const orb1 = document.getElementById('glow-orb-1');
-    const orb2 = document.getElementById('glow-orb-2');
-    const orb3 = document.getElementById('glow-orb-3');
-
-    orb1.style.animation = '';
-    orb2.style.animation = '';
-    orb3.style.animation = '';
-
-    const btns = ['warm', 'violet', 'iridescent', 'disco'];
-    btns.forEach(b => {
-        const btn = document.getElementById(`btn-${b}`);
-        if (btn) btn.className = "px-3.5 py-1.5 rounded-full text-[#7C38A8]/90 hover:bg-white/40 font-medium transition-all";
-    });
-
-    btns.forEach(b => {
-        const btn = document.getElementById(`btn-${b}-m`);
-        if (btn) btn.className = "px-3 py-1.5 rounded-full text-[11px] text-[#7C38A8] font-medium transition-all";
-    });
-
-    if (mode === 'iridescent') {
-        document.body.classList.add('light-iridescent');
-        document.getElementById('btn-iridescent').className = "px-3.5 py-1.5 rounded-full bg-gradient-to-r from-[#7C38A8] to-[#BA91D6] text-white font-semibold transition-all shadow-md";
-        document.getElementById('btn-iridescent-m').className = "px-3 py-1.5 rounded-full text-[11px] bg-gradient-to-r from-[#7C38A8] to-[#BA91D6] text-white font-semibold transition-all shadow-sm";
-        orb1.style.backgroundColor = '#7C38A8';
-        orb2.style.backgroundColor = '#FFD700';
-        orb3.style.backgroundColor = '#BA91D6';
-    } else if (mode === 'disco') {
-        document.body.classList.add('light-disco');
-        document.getElementById('btn-disco').className = "px-3.5 py-1.5 rounded-full bg-[#E60067] text-white font-semibold transition-all shadow-md";
-        document.getElementById('btn-disco-m').className = "px-3 py-1.5 rounded-full text-[11px] bg-[#E60067] text-white font-semibold transition-all shadow-sm";
-        orb1.style.backgroundColor = '#7C38A8';
-        orb2.style.backgroundColor = '#FFD700';
-        orb3.style.backgroundColor = '#BA91D6';
-    } else if (mode === 'warm') {
-        document.body.classList.add('light-warm');
-        document.getElementById('btn-warm').className = "px-3.5 py-1.5 rounded-full bg-white text-[#7C38A8] font-semibold transition-all shadow-md";
-        document.getElementById('btn-warm-m').className = "px-3 py-1.5 rounded-full text-[11px] bg-[#7C38A8] text-white font-semibold transition-all shadow-sm";
-        orb1.style.backgroundColor = '#FFD700';
-        orb2.style.backgroundColor = '#BA91D6';
-        orb3.style.backgroundColor = '#ECDFD4';
-    } else if (mode === 'violet') {
-        document.body.classList.add('light-violet');
-        document.getElementById('btn-violet').className = "px-3.5 py-1.5 rounded-full bg-[#7C38A8] text-white font-semibold transition-all shadow-md";
-        document.getElementById('btn-violet-m').className = "px-3 py-1.5 rounded-full text-[11px] bg-[#7C38A8] text-white font-semibold transition-all shadow-sm";
-        orb1.style.backgroundColor = '#7C38A8';
-        orb2.style.backgroundColor = '#22132C';
-        orb3.style.backgroundColor = '#BA91D6';
-    }
-}
-// Écoute dynamique du chargement du menu à la fin du fichier script.js
-const menuImg = document.getElementById('menu-image');
-
-if (menuImg) {
-    // Si l'image est déjà chargée (depuis le cache)
-    if (menuImg.complete) {
-        handleMenuLoaded(menuImg);
-    } else {
-        // Sinon, on attend l'événement de chargement ou d'erreur
-        menuImg.addEventListener('load', () => handleMenuLoaded(menuImg));
-        menuImg.addEventListener('error', () => handleMenuError(menuImg));
-    }
 }
