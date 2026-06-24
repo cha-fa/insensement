@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Insensément — Restaurant Sensoriel & Disco Chic</title>
+    <title>Insensément — Restaurant Nantes Manufacture</title>
     
     <!-- Tailwind CSS pour une mise en page fluide et responsive -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -106,59 +106,28 @@
     <div class="absolute bottom-[-10%] left-[5%] w-[50vw] h-[50vw] rounded-full bg-[#BA91D6] ambient-glow pointer-events-none z-0" id="glow-orb-3"></div>
 
     <!-- HEADER / NAVIGATION -->
+<!-- HEADER & NAVIGATION -->
     <header class="w-full py-6 px-6 md:px-12 flex justify-between items-center relative z-10 max-w-7xl mx-auto">
-        <a href="#" class="flex items-center gap-3 group-header">
-            <div class="w-10 h-10 rounded-full flex items-center justify-center border-2 border-[#7C38A8] bg-white/60 backdrop-blur-sm relative overflow-hidden group-header:scale-110 transition-transform">
-                <svg class="spin-disco-ball" viewBox="0 0 24 24" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="12" cy="12" r="9" fill="url(#discoGrad)" stroke="#7C38A8" stroke-width="0.75" />
-                    <path d="M12 3v18M3 12h18" stroke="rgba(255,255,255,0.7)" stroke-width="0.5" />
+        <a href="#" class="flex items-center gap-3 group group-header">
+            <div class="flex items-center justify-center relative transition-transform group-hover:scale-110 pointer-events-none">
+                <svg class="w-10 h-10 overflow-visible" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path class="sparkle-item sparkle-1" d="M12 4 L14.5 10.5 L21 13 L14.5 15.5 L12 22 L9.5 15.5 L3 13 L9.5 10.5 Z" fill="#FFD700" />
+                    <path class="sparkle-item sparkle-2" d="M28 8 L29.5 12 L33.5 13.5 L29.5 15 L28 19 L26.5 15 L22.5 13.5 L26.5 12 Z" fill="#BA91D6" />
+                    <path class="sparkle-item sparkle-3" d="M24 22 L26 27.5 L31.5 29.5 L26 31.5 L24 37 L22 31.5 L16.5 29.5 L22 27.5 Z" fill="#FFFFFF" />
+                    <path class="sparkle-item sparkle-4" d="M8 26 L9 28.5 L11.5 29.5 L9 30.5 L8 33 L7 30.5 L4.5 29.5 L7 28.5 Z" fill="#FFD700" />
+                    <path class="sparkle-item sparkle-5" d="M19 2 L19.8 4.2 L22 5 L19.8 5.8 L19 8 L18.2 5.8 L16 5 L18.2 4.2 Z" fill="#FFFFFF" />
                 </svg>
             </div>
-            <span class="neon-header text-3xl md:text-4xl tracking-wide lowercase pt-1 block">insensément</span>
+            <span class="neon-header brand-text-amatic text-4xl md:text-5xl tracking-wide lowercase pt-1 block">insensément</span>
         </a>
 
-        <!-- Sélecteur d'ambiance lumineuse tactile -->
-        <div class="hidden md:flex items-center gap-1.5 plexiglas-dark px-3 py-1.5 rounded-full text-xs">
-            <span class="text-[#7C38A8] font-bold mr-2 uppercase tracking-wider text-[10px] pl-1">Éclairage :</span>
-            <button onclick="setLightMode('iridescent')" id="btn-iridescent" class="px-3.5 py-1.5 rounded-full bg-gradient-to-r from-[#7C38A8] to-[#BA91D6] text-white font-semibold transition-all shadow-md">
-                ✨ Irisé Caméléon
-            </button>
-            <button onclick="setLightMode('disco')" id="btn-disco" class="px-3.5 py-1.5 rounded-full text-[#7C38A8]/90 hover:bg-white/40 font-medium transition-all">
-                🪩 Show Disco
-            </button>
-            <button onclick="setLightMode('warm')" id="btn-warm" class="px-3.5 py-1.5 rounded-full text-[#7C38A8]/90 hover:bg-white/40 font-medium transition-all">
-                ☀ Lumière Chaude
-            </button>
-            <button onclick="setLightMode('violet')" id="btn-violet" class="px-3.5 py-1.5 rounded-full text-[#7C38A8]/90 hover:bg-white/40 font-medium transition-all">
-                🔮 Violet Profond
-            </button>
-        </div>
-
         <div>
-            <a href="https://www.google.com" target="_blank" class="btn-reserve-primary btn-glow-pulse text-white px-5 md:px-7 py-3 rounded-full font-bold text-xs md:text-sm tracking-wider uppercase inline-flex items-center gap-2">
+            <a href="https://www.google.com" target="_blank" class="btn-reserve-primary btn-glow-pulse text-white px-5 md:px-7 py-3 rounded-full text-xs md:text-sm tracking-wider uppercase inline-flex items-center gap-2">
                 <span>Réserver</span>
                 <i data-lucide="external-link" class="w-4 h-4"></i>
             </a>
         </div>
     </header>
-
-    <!-- Contrôles Ambiances Mobiles -->
-    <div class="md:hidden flex justify-center py-2 px-4 relative z-10">
-        <div class="flex items-center gap-1 bg-white/65 backdrop-blur-md p-1 rounded-full border border-white/60 shadow-md w-full max-w-sm justify-around">
-            <button onclick="setLightMode('iridescent')" id="btn-iridescent-m" class="px-3 py-1.5 rounded-full text-[11px] bg-gradient-to-r from-[#7C38A8] to-[#BA91D6] text-white font-semibold transition-all shadow-sm">
-                ✨ Irisé
-            </button>
-            <button onclick="setLightMode('disco')" id="btn-disco-m" class="px-3 py-1.5 rounded-full text-[11px] text-[#7C38A8] font-medium transition-all">
-                🪩 Disco
-            </button>
-            <button onclick="setLightMode('warm')" id="btn-warm-m" class="px-3 py-1.5 rounded-full text-[11px] text-[#7C38A8] font-medium transition-all">
-                ☀ Chaude
-            </button>
-            <button onclick="setLightMode('violet')" id="btn-violet-m" class="px-3 py-1.5 rounded-full text-[11px] text-[#7C38A8] font-medium transition-all">
-                🔮 Violet
-            </button>
-        </div>
-    </div>
 
     <!-- MAIN SECTION -->
     <main class="flex-grow relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-8 md:py-16 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
@@ -167,20 +136,27 @@
         <div class="lg:col-span-5 flex flex-col justify-center text-center lg:text-left">
             <div class="mb-6 relative flex justify-center lg:justify-start">
                 <div class="relative w-full max-w-[320px] md:max-w-[400px] lg:max-w-[440px]">
-                    <img id="main-logo-image" src="logo-insensement.png" alt="Logo Insensément" class="w-full h-auto object-contain drop-shadow-[0_10px_20px_rgba(124,56,168,0.3)] hover:scale-102 transition-transform duration-500" onerror="handleLogoError(this)">
+                    <img id="main-logo-image" src="logo-insensement.png" alt="Logo Insensément" class="w-full h-auto object-contain drop-shadow-[0_10px_20px_rgba(124,56,168,0.3)] hover:scale-105 transition-transform duration-500" onerror="handleLogoError(this)">
+                    <span class="text-xs uppercase tracking-[0.3em] text-[#BA91D6] mt-1 block font-semibold">Restaurant de cuisine inspirée & de saison à Nantes</span>
                     <div id="logo-fallback" class="hidden flex-col items-center lg:items-start py-4">
-                        <h1 class="neon-text-brand text-5xl sm:text-6xl md:text-7xl tracking-normal lowercase py-1">insensément</h1>
-                        <span class="text-xs uppercase tracking-[0.3em] text-[#BA91D6] mt-1 block font-semibold">Restaurant Sensoriel</span>
+                        <h1 class="neon-text-brand brand-text-amatic text-7xl sm:text-8xl md:text-9xl tracking-normal lowercase py-1">insensément</h1>
                     </div>
                 </div>
             </div>
 
-            <h2 class="font-title text-3xl sm:text-4xl md:text-5xl font-bold text-[#7C38A8] mb-6 leading-tight">
-                Un lieu sensible, <br class="hidden sm:inline">étrange, doux & vivant.
+            <h2 class="text-2xl sm:text-2xl md:text-2xl font-bold text-[#7C38A8] mb-6 leading-tight">
+                Des recettes que l'on connaît, <br class="hidden sm:inline">Des assiettes qui prennent parfois un autre chemin.
             </h2>
 
-            <p class="text-base sm:text-lg font-normal text-[#22132C]/85 leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0">
-                La célébration de la différence à travers une cuisine intuitive et vibrante. Une expérience unique, guidée par l'ombre et la lumière de nos assiettes.
+            <p class="text-base sm:text-lg font-normal text-[#22132C]/85 leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0" id="concept-desc">
+                Chez insensément, nous aimons cuisiner les produits e saison avec curiosité, couleur et générosité
+                <br>
+                Pas de cuisine compliquée.
+                <br>
+                Pas de cuisine prétentieuse.
+            </p>
+            <p class="text-base sm:text-lg font-normal text-[#22132C]/85 leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0" id="concept-desc"></p>
+                Juste l'envie de bien manger, dans un lieu vivant et accueillant.
             </p>
 
             <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center mb-10 w-full max-w-md mx-auto lg:mx-0">
@@ -188,23 +164,20 @@
                     <span>Réserver votre table</span>
                     <i data-lucide="arrow-right" class="w-5 h-5"></i>
                 </a>
-                <a href="#menu-week" class="w-full sm:w-auto px-6 py-4 rounded-full border-2 border-[#7C38A8]/30 hover:border-[#7C38A8] font-bold text-xs md:text-sm text-[#7C38A8] text-center transition-all bg-white/40 backdrop-blur-sm tracking-wider uppercase">
-                    Découvrir l'Ardoise
-                </a>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left max-w-md mx-auto lg:mx-0 border-t border-[#7C38A8]/15 pt-6">
                 <div class="flex items-start gap-3">
-                    <span class="p-1 rounded-full bg-[#7C38A8]/15 text-[#7C38A8] mt-0.5">
-                        <i data-lucide="sparkles" class="w-4 h-4"></i>
+                    <span class="p-1.5 rounded-full bg-[#7C38A8]/15 text-[#7C38A8] mt-0.5 flex items-center justify-center">
+                        <i data-lucide="users" class="w-4 h-4"></i>
                     </span>
-                    <p class="text-xs text-[#22132C]/90"><strong class="text-[#7C38A8] font-semibold">Tonalités Irisées</strong> pour le changement permanent de point de vue.</p>
+                    <p class="text-xs text-[#22132C]/90"><strong class="text-[#7C38A8] font-semibold">Nantes - Quartier manufacture</strong>(à 10 min à pied de la gare)</p>
                 </div>
                 <div class="flex items-start gap-3">
                     <span class="p-1.5 rounded-full bg-[#BA91D6]/20 text-[#7C38A8] mt-0.5 flex items-center justify-center">
-                        <i data-lucide="sparkle" class="w-4 h-4 text-[#7C38A8]"></i>
+                        <i data-lucide="train" class="w-4 h-4 text-[#7C38A8]"></i>
                     </span>
-                    <p class="text-xs text-[#22132C]/90"><strong class="text-[#7C38A8] font-semibold">Miroirs & Facettes</strong> pour refléter l'énergie vibrante et sensorielle du lieu.</p>
+                    <p class="text-xs text-[#22132C]/90"><strong class="text-[#7C38A8] font-semibold">Groupes bienvenus</strong> sur réservation.</p>
                 </div>
             </div>
         </div>
@@ -212,19 +185,26 @@
         <!-- Colonne Droite : Le Menu Dynamique Google Drive -->
         <div class="lg:col-span-7 flex flex-col items-center justify-center relative mt-6 lg:mt-0" id="menu-week">
             <div class="relative w-full max-w-[480px] rounded-[2.5rem] p-4 iridescent-border-card shadow-2xl transition-all duration-700 hover:scale-[1.02]">
-                <div class="absolute -top-3 -right-3 w-16 h-16 organic-blob-1 bg-[#FFD700] flex items-center justify-center border-2 border-white shadow-lg z-10">
-                    <span class="spin-disco-ball text-2xl">✨</span>
+                
+                <!-- Magnifique grappe de petites paillettes dorées, blanches et lavande en liberté dans le coin (sans cercle ni blob) -->
+                <div class="absolute -top-4 -right-4 w-16 h-16 flex items-center justify-center z-10 pointer-events-none">
+                    <svg class="w-14 h-14 overflow-visible" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path class="sparkle-item sparkle-1" d="M12 4 L14.5 10.5 L21 13 L14.5 15.5 L12 22 L9.5 15.5 L3 13 L9.5 10.5 Z" fill="#FFD700" />
+                        <path class="sparkle-item sparkle-2" d="M28 8 L29.5 12 L33.5 13.5 L29.5 15 L28 19 L26.5 15 L22.5 13.5 L26.5 12 Z" fill="#BA91D6" />
+                        <path class="sparkle-item sparkle-3" d="M24 22 L26 27.5 L31.5 29.5 L26 31.5 L24 37 L22 31.5 L16.5 29.5 L22 27.5 Z" fill="#FFFFFF" />
+                        <path class="sparkle-item sparkle-4" d="M8 26 L9 28.5 L11.5 29.5 L9 30.5 L8 33 L7 30.5 L4.5 29.5 L7 28.5 Z" fill="#FFD700" />
+                        <path class="sparkle-item sparkle-5" d="M19 2 L19.8 4.2 L22 5 L19.8 5.8 L19 8 L18.2 5.8 L16 5 L18.2 4.2 Z" fill="#FFFFFF" />
+                    </svg>
                 </div>
 
                 <div class="text-center pt-3 pb-5">
-                    <h3 class="font-title text-xl md:text-2xl font-bold text-[#7C38A8] tracking-wide">L'Ardoise de la Semaine</h3>
-                    <p class="text-[10px] md:text-xs text-[#7C38A8]/80 mt-1 uppercase tracking-[0.2em] font-semibold">Cuisine Intuitive renouvelée</p>
+                    <h3 class="text-xl md:text-2xl font-bold text-[#7C38A8] tracking-wide">Cette semaine chez insensément</h3>
                 </div>
 
                 <div class="relative aspect-[3/4] w-full rounded-[2rem] overflow-hidden bg-[#ECDFD4]/60 border border-white/60 group/image">
                     <div id="menu-loader" class="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-[#ECDFD4]/90 z-20">
                         <div class="w-9 h-9 rounded-full border-4 border-[#7C38A8]/20 border-t-[#7C38A8] animate-spin"></div>
-                        <span class="text-xs text-[#7C38A8] font-semibold tracking-wider">Lecture de l'ardoise...</span>
+                        <span class="text-xs text-[#7C38A8] font-semibold tracking-wider">Lecture du menu...</span>
                     </div>
 
                     <img id="menu-image" 
@@ -242,7 +222,7 @@
                 <div class="flex items-center justify-between mt-4 px-2">
                     <div class="text-xs text-[#22132C]/70 flex items-center gap-2">
                         <span class="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse"></span>
-                        <span class="font-medium">Créations fraîches du jour</span>
+                        <span class="font-medium">Sur place & à emporter</span>
                     </div>
                     <button onclick="openMenuInNewTab()" class="text-xs font-bold text-[#7C38A8] hover:text-[#BA91D6] flex items-center gap-1 transition-colors uppercase tracking-wider">
                         <span>Agrandir</span>
@@ -250,29 +230,14 @@
                     </button>
                 </div>
 
-                <!-- Fallback si l'image Google Drive est bloquée ou lente -->
-                <div id="menu-error-fallback" class="hidden absolute inset-0 bg-[#ECDFD4]/95 p-8 flex-col justify-between rounded-[2.5rem] border-2 border-[#BA91D6]">
+                <!-- Fallback si l'image Google Drive est bloquée ou inaccessible -->
+                <div id="menu-error-fallback" class="hidden absolute inset-0 bg-[#ECDFD4]/95 p-8 flex-col justify-between rounded-[2.5rem] border-2 border-[#BA91D6] z-30 animate-fade-in">
                     <div class="text-center">
-                        <span class="text-[10px] font-bold uppercase tracking-[0.25em] text-[#7C38A8]/70">Inspiration du Moment</span>
-                        <h4 class="font-title text-2xl font-bold text-[#7C38A8] mt-2">L'Ardoise Ephémère</h4>
+                        <span class="text-[10px] font-bold uppercase tracking-[0.25em] text-[#7C38A8]/70">Cette semaine chez insensément</span>
                         <div class="w-10 h-0.5 bg-[#FFD700] mx-auto my-3"></div>
                     </div>
-                    <div class="space-y-5 my-auto text-center">
-                        <div>
-                            <p class="font-bold text-[#7C38A8] text-base">La Rosée du Matin</p>
-                            <p class="text-xs text-[#22132C]/80 mt-1">Infusion d'herbes folles glacées, légumes croquants.</p>
-                        </div>
-                        <div>
-                            <p class="font-bold text-[#7C38A8] text-base">L'Étrange Clair-Obscur</p>
-                            <p class="text-xs text-[#22132C]/80 mt-1">Contrastes chauds de champignons sauvages.</p>
-                        </div>
-                        <div>
-                            <p class="font-bold text-[#7C38A8] text-base">L'Illusion Sucrée</p>
-                            <p class="text-xs text-[#22132C]/80 mt-1">Ganache soyeuse à la lavande, larmes d'iridescence.</p>
-                        </div>
-                    </div>
                     <div class="text-center">
-                        <a href="https://lh3.googleusercontent.com/d/1gZezjE7bHYdkTt9yhieijumFZ2zSMWti" target="_blank" class="px-5 py-2.5 rounded-full bg-[#7C38A8] text-white text-xs font-bold inline-flex items-center gap-1.5 shadow-sm">
+                        <a href="https://lh3.googleusercontent.com/d/1gZezjE7bHYdkTt9yhieijumFZ2zSMWti" target="_blank" class="px-5 py-2.5 rounded-full bg-[#7C38A8] text-white text-xs font-bold inline-flex items-center gap-1.5 shadow-sm hover:bg-[#BA91D6] transition-colors">
                             <span>Consulter l'image en direct</span>
                             <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
                         </a>
@@ -291,15 +256,11 @@
                     <i data-lucide="clock" class="w-5 h-5"></i>
                 </div>
                 <div>
-                    <h4 class="font-title font-bold text-base text-[#7C38A8] mb-2 uppercase tracking-wider">Les Instants</h4>
+                    <h4 class="font-bold text-base text-[#7C38A8] mb-2 uppercase tracking-wider">Horaires</h4>
                     <div class="text-xs sm:text-sm text-[#22132C]/90 space-y-1.5">
                         <p class="flex justify-between gap-4">
-                            <span>Mardi - Samedi :</span> 
-                            <span class="font-semibold text-right">12h00 - 14h30<br>19h00 - 22h30</span>
-                        </p>
-                        <p class="flex justify-between gap-4 text-[#22132C]/50">
-                            <span>Dimanche - Lundi :</span> 
-                            <span class="text-right">Fermé</span>
+                            <span>Du lundi au vendredi :</span> 
+                            <span class="font-semibold text-right">9h00 - 15h<br></span>
                         </p>
                     </div>
                 </div>
@@ -311,8 +272,8 @@
                     <i data-lucide="map-pin" class="w-5 h-5"></i>
                 </div>
                 <div>
-                    <h4 class="font-title font-bold text-base text-[#7C38A8] mb-2 uppercase tracking-wider">L'Écrin</h4>
-                    <p class="text-xs sm:text-sm text-[#22132C]/90 leading-relaxed mb-3 font-medium">14 Rue du Sens, 75011 Paris</p>
+                    <h4 class="font-bold text-base text-[#7C38A8] mb-2 uppercase tracking-wider">Adresse</h4>
+                    <p class="text-xs sm:text-sm text-[#22132C]/90 leading-relaxed mb-3 font-medium">Rue de Coulmiers, 44000 Nantes</p>
                     <a href="https://maps.google.com" target="_blank" class="text-xs font-bold text-[#7C38A8] hover:text-[#BA91D6] inline-flex items-center gap-1.5 uppercase tracking-wider">
                         <span>Ouvrir dans Google Maps</span>
                         <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
@@ -326,9 +287,9 @@
                     <i data-lucide="phone" class="w-5 h-5"></i>
                 </div>
                 <div>
-                    <h4 class="font-title font-bold text-base text-[#7C38A8] mb-2 uppercase tracking-wider">Prendre Contact</h4>
+                    <h4 class="font-bold text-base text-[#7C38A8] mb-2 uppercase tracking-wider">Contact</h4>
                     <p class="text-xs sm:text-sm text-[#22132C]/90 mb-1.5">
-                        Téléphone : <a href="tel:+33142748912" class="font-bold hover:underline text-[#7C38A8]">+33 (0)1 42 74 89 12</a>
+                        Téléphone : <a href="tel:+33142748912" class="font-bold hover:underline text-[#7C38A8]">+33 (0)7 64 44 24 45</a>
                     </p>
                     <p class="text-xs sm:text-sm text-[#22132C]/90">
                         Email : <a href="mailto:contact@insensement.fr" class="font-bold hover:underline text-[#7C38A8]">contact@insensement.fr</a>
@@ -338,10 +299,11 @@
         </div>
     </section>
 
+
     <!-- FOOTER -->
     <footer class="w-full py-8 text-center text-xs text-[#7C38A8]/85 relative z-10 border-t border-[#7C38A8]/10">
         <p>© 2026 Insensément. Tous droits réservés.</p>
-        <p class="mt-2 font-medium italic">"Insensément, c'est une expérience à part entière." ♡</p>
+        <p class="mt-2 font-medium italic">"Les lieux comptent. Les gens encore plus." ♡</p>
     </footer>
 
     <!-- Lucide Icons Library -->
